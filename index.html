@@ -1,27 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bio-OS Global | Hasan Ayhan Ozcan</title>
-    <style>
-        body { background: #050505; color: #00ff41; font-family: 'Courier New', monospace; text-align: center; padding: 50px; }
-        .container { border: 2px solid #00ff41; padding: 40px; display: inline-block; box-shadow: 0 0 20px #00ff41; }
-        h1 { font-size: 2.5em; text-transform: uppercase; letter-spacing: 10px; }
-        .founder { color: #fff; font-size: 1.5em; margin-bottom: 20px; }
-        .status-blink { animation: blink 1s infinite; color: #f00; font-weight: bold; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>MOLECULAR INTERNET</h1>
-        <div class="founder">FOUNDER & ARCHITECT: HASAN AYHAN OZCAN</div>
-        <hr color="#00ff41">
-        <p>SYSTEM STATUS: <span class="status-blink">GLOBAL BROADCAST ACTIVE</span></p>
-        <p>This infrastructure manages bio-nano communication via aqueous channels.</p>
-        <p>Proprietary Technology &copy; 2024-2026</p>
-        <button onclick="alert('Molecular Signal Sent to Global Nodes!')" style="background:#00ff41; color:#000; border:none; padding:15px; cursor:pointer; font-weight:bold;">SEND GLOBAL TEST SIGNAL</button>
-    </div>
-</body>
-</html>
+# =============================================================================
+# COPYRIGHT (C) 2024-2026 MOLECULAR INTERNET INFRASTRUCTURE
+# ALL RIGHTS RESERVED. 
+#
+# FOUNDER & CHIEF ARCHITECT: HASAN AYHAN OZCAN
+# LEGAL NOTICE: THIS SOURCE CODE IS THE PROPRIETARY PROPERTY OF HASAN AYHAN OZCAN.
+# UNAUTHORIZED COPYING, MODIFICATION, OR DISTRIBUTION IS STRICTLY PROHIBITED.
+# =============================================================================
+
+import time
+import random
+import hashlib
+from datetime import datetime
+
+class MolecularStandard:
+    """Global protocols defined by Founder Hasan Ayhan Özcan"""
+    VERSION = "GLOBAL_V1_BETA"
+    PROTOCOL = "M-TCP/IP (Molecular Transmission Control Protocol)"
+    SECURITY = "BIO-RSA 2048-BIT EQUIVALENT ENZYMATIC HASHING"
+
+class BioEncryptor:
+    """Secures communication between the Cloud and Human Biology."""
+    @staticmethod
+    def sign_packet(payload, secret_key):
+        timestamp = str(datetime.now())
+        signature = hashlib.sha256(f"{payload}{secret_key}{timestamp}".encode()).hexdigest()
+        return signature[:12]
+
+class GlobalAqueousChannel:
+    """Simulates the Physical Layer of the New World System."""
+    def __init__(self, fluid_density=1.2):
+        self.density = fluid_density
+
+    def transmit(self, distance):
+        # Physics-based delay simulation (Fick's Diffusion Law)
+        delay = (distance ** 2) * 0.01 * self.density
+        print(f"   [CHANNEL] Propagating molecular signal over {distance}µm...")
+        time.sleep(min(delay, 2.5))
+        return random.random() > 0.12 # 88% Success Rate
+
+class NanoNode:
+    """The hardware/biological unit that executes the Founder's will."""
+    def __init__(self, node_id, bio_address):
+        self.node_id = node_id
+        self.bio_address = bio_address
+        self.resources = {"SYNTHETIC_CELLS": 500, "DATA_PACKETS": 1000}
+
+    def receive_and_execute(self, address, command, sig):
+        if address == self.bio_address:
+            print(f"   [NODE:{self.node_id}] Bio-Address Verified. Signature: {sig}")
+            print(f"   [ACTION] Executing: {command} ... DONE.")
+            return True
+        return False
+
+class BioInternetEmpire:
+    """The Central Intelligence System of the New World."""
+    def __init__(self):
+        self.founder = "HASAN AYHAN OZCAN"
+        self.nodes = []
+        self.channel = GlobalAqueousChannel()
+        self.secret_key = "OZCAN_MASTER_KEY_2026"
+
+    def deploy_infrastructure(self):
+        print("="*65)
+        print(f" SYSTEM BOOTING: MOLECULAR INTERNET CORE")
+        print(f" ARCHITECT: {self.founder}")
+        print(f" STANDARDS: {MolecularStandard.PROTOCOL}")
+        print("="*65)
+        self.nodes.append(NanoNode("EUROPE_GATEWAY_01", "0xHA_OZ_01"))
+        self.nodes.append(NanoNode("ASIA_GATEWAY_02", "0xHA_OZ_02"))
+        time.sleep(1)
+        print(f"[STATUS] Global Infrastructure deployed by {self.founder}.\n")
+
+    def global_command(self, address_index, task):
+        target_addr = "0xHA_OZ_0" + str(address_index)
+        signature = BioEncryptor.sign_packet(task, self.secret_key)
+        
+        print(f"\n>>> GLOBAL COMMAND INITIATED BY FOUNDER <<<")
+        print(f"TARGET ADDR: {target_addr} | COMMAND: {task}")
+        
+        if self.channel.transmit(distance=40.0):
+            for node in self.nodes:
+                if node.receive_and_execute(target_addr, task, signature):
+                    print(f">>> COMMAND SUCCESSFUL: SYSTEM STABILIZED <<<")
+                    return
+            print(">>> ERROR: NODE UNREACHABLE <<<")
+        else:
+            print(">>> ERROR: SIGNAL INTERFERENCE (Aqueous Noise) <<<")
+
+# --- EXECUTION ---
+if __name__ == "__main__":
+    Empire = BioInternetEmpire()
+    Empire.deploy_infrastructure()
+    
+    # Simulation of Global Governance via Molecular Internet
+    while True:
+        print("\n[CENTRAL COMMAND MENU]")
+        print("1. Release Bio-Data (Europe)")
+        print("2. Activate Synthetic Growth (Asia)")
+        print("3. Emergency System Shutdown")
+        
+        cmd = input(f"\nOperator {Empire.founder}, Select Protocol: ")
+        
+        if cmd == '1':
+            Empire.global_command(1, "RELEASE_DATA_STREAM")
+        elif cmd == '2':
+            Empire.global_command(2, "ACTIVATE_CELL_REGEN")
+        elif cmd == '3':
+            print(f"Terminating BIOS... Secure logout for {Empire.founder}.")
+            break
+        else:
+            print("Invalid Access Code.")
